@@ -33,7 +33,8 @@ function App() {
 
    if(existingItemIndex !== -1) {
     const updatedCart = [...cart];
-    updatedCart[existingItemIndex]={ ...updatedCart[existingItemIndex], quantity: updatedCart[existingItemIndex].quantity + 1};
+    updatedCart[existingItemIndex]={ ...updatedCart[existingItemIndex], 
+      quantity: updatedCart[existingItemIndex].quantity + 1};
     setCart(updatedCart);
    }
    else {
@@ -56,7 +57,8 @@ const removeFromCart =(id) => {
   setCart(updatedCart);
 };
 const increaseQuantity =(id) => {
-  const updatedCart = cart.map((item) => (item.id === id ? { ...item, quantity: item.quantity + 1 } :item));
+  const updatedCart = cart.map((item) => (item.id === id ? 
+    { ...item, quantity: item.quantity + 1 } :item));
 
   setCart(updatedCart);
 }
@@ -67,24 +69,55 @@ const increaseQuantity =(id) => {
  
   const Cart = () => {
     return (
-      <div style={{ marginTop: '20px', fontFamily: 'sans-serif', border: '1px solid #ccc', padding: '10px', borderRadius: '5px' }}>
-        <h2 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'chocolate', borderRadius: '5px', border: '1px solid #ccc' }}>Shopping Cart</h2>
+      <div style={{ marginTop: '20px', 
+      fontFamily: 'sans-serif', border: '1px solid #ccc', 
+      padding: '10px', borderRadius: '5px' }}>
+        <h2 style={{ display: 'flex', alignItems: 'center', 
+        justifyContent: 'center', color: 'chocolate', 
+        borderRadius: '5px', border: '1px solid #ccc' }}>Shopping Cart</h2>
         {cart.length === 0 ? (
           <p style={{ textAlign: 'center' }}>Your cart is empty!</p>
         ) : (
           <div>
             {cart.map((item) => (
-              <div key={item.id} style={{ marginBottom: '20px', borderBottom: '1px solid #ccc', paddingBottom: '20px' }}>
-                <img style={{ width: '100px', height: '100px', borderRadius: '10px', marginBottom: '10px' }} src={item.image} alt={item.name} />
-                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', textAlign: 'center', '@media (min-width: 768px)': { flexDirection: 'column', alignItems: 'center' } }}>
+              <div key={item.id} style={{ marginBottom: '20px', 
+              borderBottom: '1px solid #ccc', 
+              paddingBottom: '20px' }}>
+               
+                <div style={{
+                   display: 'flex', 
+                   flexDirection: 'row',
+                   justifyContent:'space-between', 
+                   alignItems: 'center', 
+                   textAlign: 'center', 
+                   '@media (min-width: 768px)': 
+                   { flexDirection: 'column',display:'flex', 
+                   alignItems: 'center' } }}>
+
+                  <img style={{ width: '100px', 
+                  height: '100px', 
+                  borderRadius: '10px',}} 
+                  src={item.image} alt={item.name} />
+
                   <h3>{item.name} - UGX {item.price}</h3>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <div style={{ margin: '5px' }}>
-                      <button style={{ backgroundColor: 'white', color: 'black', border: '1px solid black', padding: '5px 10px', borderRadius: '5px', cursor: 'pointer' }} onClick={() => decreaseQuantity(item.id)}>-</button>
+                      <button style={{ 
+                        backgroundColor: 'white', 
+                        color: 'black', border: '1px solid black', 
+                        padding: '5px 10px', borderRadius: '5px', 
+                        cursor: 'pointer' }} onClick={() => decreaseQuantity(item.id)}>-</button>
                       <span style={{ margin: '0 5px' }}>{item.quantity}</span>
-                      <button style={{ backgroundColor: 'white', color: 'black', border: '1px solid black', padding: '5px 10px', borderRadius: '5px', cursor: 'pointer' }} onClick={() => increaseQuantity(item.id)}>+</button>
+                      <button style={{ backgroundColor: 'white',
+                       color: 'black', border: '1px solid black',
+                        padding: '5px 10px', borderRadius: '5px', 
+                        cursor: 'pointer' }} onClick={() => increaseQuantity(item.id)}>+</button>
                     </div>
-                    <button style={{ backgroundColor: 'red', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', padding: '10px 10px', marginLeft: '10px' }} onClick={() => removeFromCart(item.id)}>Remove</button>
+                    <button style={{ backgroundColor: 'red', 
+                    color: 'white', border: 'none', 
+                    borderRadius: '5px', cursor: 'pointer', 
+                    padding: '10px 10px', marginLeft: '10px' }} 
+                    onClick={() => removeFromCart(item.id)}>Remove</button>
                   </div>
                 </div>
               </div>
@@ -92,11 +125,20 @@ const increaseQuantity =(id) => {
           </div>
         )}
 
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-          <button style={{ backgroundColor: 'green', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', padding: '10px 20px', marginRight: '10px' }} onClick={handleMakeOrder}>Make Order</button>
+        <div style={{ display: 'flex', 
+        flexDirection: 'row', justifyContent: 'center', 
+        alignItems: 'center' }}>
+          <button style={{ backgroundColor: 'green', 
+          
+          color: '#fff', border: 'none', borderRadius: '5px', 
+          cursor: 'pointer', padding: '10px 20px', 
+          marginRight: '10px' }} onClick={handleMakeOrder}>Make Order</button>
           <ToastContainer />
-          <Link style={{ textDecoration: 'none', color: 'blue', cursor: 'pointer', marginRight: '10px', marginLeft: '10px' }} to='/'>Continue Shopping</Link>
-          <div style={{ cursor: 'pointer', marginLeft: '10px' }}>Checkout <FontAwesomeIcon icon={faArrowRight} /></div>
+          <Link style={{ textDecoration: 'none', 
+          color: 'blue', cursor: 'pointer', 
+          marginRight: '10px', marginLeft: '10px' }} to='/'>Continue Shopping</Link>
+          <div style={{ cursor: 'pointer',
+           marginLeft: '10px' }}>Checkout <FontAwesomeIcon icon={faArrowRight} /></div>
         </div>
 
 
@@ -104,6 +146,7 @@ const increaseQuantity =(id) => {
       </div>
     );
   };
+
 
   return (
     <Router>
@@ -137,7 +180,8 @@ const increaseQuantity =(id) => {
                 cursor: 'pointer',
               }}
             >
-              View <FontAwesomeIcon icon={faShoppingCart} /> ({cart.length})
+              View <FontAwesomeIcon icon={faShoppingCart} /> 
+              ({cart.length})
             </button>
           </Link>
 
